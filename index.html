@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outfit Landing Page Reveal Animation | Codegrid</title>
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/pp-neue-montreal" />
+    <style>
+      :root {
+        --base-100: #F4F4F4;
+        --base-200: #a6d96a;
+        --base-300: #201D1D;
+        
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body{
+        overflow-x: hidden;
+
+      }
+
+      h1,
+      a,
+      p {
+        font-family: "PP Neue Montreal", sans-serif;
+        font-weight: 500;
+        letter-spacing: -2%;
+        line-height: 1;
+        text-decoration: none;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 87.5% 100%, 75% 100%, 62.5% 100%, 50% 100%, 37.5% 100%, 25% 100%, 12.5% 100%, 0% 100%);
+        background-color: var(--base-300);
+        color: var(--base-100);
+        will-change: clip-path;
+        overflow: hidden;
+        z-index: 2;
+      }
+
+      .preloader-header {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .preloader-header .preloader-logo {
+        overflow: hidden;
+      }
+
+      .preloader-logo svg {
+        display: block;
+        width: clamp(180px, 36vw, 520px);
+        height: auto;
+      }
+
+      .header h1 svg {
+        display: block;
+        width: clamp(180px, 50vw, 1040px);
+        height: auto;
+      }
+
+      h1 svg path {
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .header h1 svg path {
+        fill: var(--base-100);
+      }
+
+      .preloader-counter {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        overflow: hidden;
+      }
+
+      .preloader-counter p {
+        color: var(--base-100);
+        font-size: clamp(1rem, 1vw, 1rem);
+        line-height: 0.85;
+      }
+
+      nav {
+        position: fixed;
+        width: 100%;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        z-index: 10;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+      }
+
+      nav a {
+        color: var(--base-300);
+        line-height: 1;
+      }
+
+      .nav-links a {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        padding: 0.08em 0.2em;
+        color: #000;
+        font-size: 1rem;
+        translate: 0 0;
+        transition: translate 250ms ease;
+      }
+
+      .nav-link-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-color: var(--base-100);
+        transition: background-color 250ms ease;
+      }
+
+      .nav-link-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      .nav-links a[aria-current="true"] {
+        translate: 0.4rem 0;
+      }
+
+      .nav-links a[aria-current="true"] .nav-link-bg {
+        background-color: #a6d96a;
+      }
+
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 100svh;
+        background-color: var(--base-200);
+        color: var(--base-300);
+        overflow: hidden;
+      }
+
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(224, 226, 219, 0.74) 0%,
+          rgba(224, 226, 219, 0.24) 50%,
+          rgba(20, 20, 20, 0.48) 100%
+        );
+        pointer-events: none;
+      }
+
+      .nav-spacer {
+        position: relative;
+        min-height: 100svh;
+        background-color: var(--base-);
+      }
+
+      .about-section {
+        position: relative;
+        color: var(--base-300);
+        background-color: var(--base-100);
+      }
+
+      .about-content {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        padding: 1.5rem;
+      }
+
+
+      .short-breif {
+        width: 70vw;
+        max-width: 1000px;
+        min-width: 300px;
+        font-family: "PP Neue Montreal", sans-serif;
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        line-height: 1.2;
+        letter-spacing: -0.05em;
+      }
+
+           .short-breif p {
+        width: 70vw;
+        max-width: 1000px;
+        min-width: 300px;
+        font-family: "PP Neue Montreal", sans-serif;
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        line-height: 1.2;
+        letter-spacing: -0.05em;
+      }
+
+      .about-feature {
+        --feature-text-gap: 1.25rem;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 1.25rem;
+        width: min(100%, 1800px);
+        min-height: 100svh;
+        margin-inline: auto;
+        padding: var(--feature-text-gap) 2.6vw;
+        color: var(--base-300);
+        background-color: var(--base-100);
+      }
+
+      .about-feature::before {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        background-color: var(--base-100);
+        content: "";
+        transform: translateX(-50%);
+      }
+
+      .about-feature h2 {
+        position: absolute;
+        z-index: 1;
+        top: var(--feature-text-gap);
+        left: 2.6vw;
+        width: 58vw;
+        font-family: "PP Neue Montreal", sans-serif;
+        color: var(--base-100);
+        font-size: clamp(4.5rem, 10.8vw, 13rem);
+        font-weight: 500;
+        letter-spacing: -0.075em;
+        line-height: 0.82;
+        text-transform: uppercase;
+        mix-blend-mode: difference;
+      }
+
+      .about-feature-image-wrap {
+        position: relative;
+        grid-column: 2;
+        width: 100%;
+        height: calc(100svh - var(--feature-text-gap) - var(--feature-text-gap));
+        min-height: 38rem;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .about-feature-image {
+        position: absolute;
+        top: -10%;
+        left: 0;
+        width: 100%;
+        height: 120%;
+        object-fit: cover;
+        object-position: center;
+        filter: grayscale(1);
+        will-change: transform;
+      }
+
+      .about-feature-copy {
+        grid-column: 3;
+        align-self: end;
+        margin-bottom: var(--feature-text-gap);
+      }
+
+      .about-feature-copy .about-feature-lead {
+        margin-bottom: var(--feature-text-gap);
+        font-size: clamp(1.2rem, 1.6vw, 2rem);
+        line-height: 1.35;
+        letter-spacing: -0.04em;
+      }
+
+      .about-feature-copy p:last-child {
+        font-size: clamp(0.95rem, 1.05vw, 1.25rem);
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+
+      @media (max-width: 1000px) {
+        .about-feature {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          min-height: 100svh;
+          padding: var(--feature-text-gap) 1.5rem;
+        }
+
+        .about-feature h2 {
+          left: 1.5rem;
+          width: calc(100% - 3rem);
+          font-size: clamp(4.5rem, 10vw, 7.5rem);
+        }
+
+        .about-feature-image-wrap {
+          grid-column: 1;
+          height: calc(100svh - var(--feature-text-gap) - var(--feature-text-gap));
+          min-height: 28rem;
+          margin: 0;
+        }
+
+        .about-feature-copy {
+          grid-column: 2;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .about-feature {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          min-height: auto;
+          padding: var(--feature-text-gap) 1.25rem;
+        }
+
+        .about-feature h2 {
+          position: absolute;
+          top: clamp(9rem, 20vh, 12rem);
+          left: 1.25rem;
+          width: calc(100% - 2.5rem);
+          margin: 0;
+          font-size: clamp(3.25rem, 16vw, 6.5rem);
+        }
+
+        .about-feature-image-wrap {
+          width: 100%;
+          height: min(125vw, 70svh);
+          min-height: 0;
+          margin: 0;
+        }
+
+        .about-feature-copy {
+          margin: 0;
+        }
+
+        .about-feature-copy .about-feature-lead {
+          font-size: clamp(1.3rem, 5vw, 1.8rem);
+        }
+
+        .about-feature-copy p:last-child {
+          font-size: 1rem;
+        }
+      }
+
+      .featured-projects {
+        --projects-gutter: clamp(1rem, 2.1vw, 2rem);
+        padding: clamp(4.5rem, 9vw, 9rem) var(--projects-gutter) clamp(5rem, 10vw, 10rem);
+        color: var(--base-300);
+        background-color: var(--base-100);
+        overflow-x: clip;
+      }
+
+      .featured-projects-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin: 0 0 clamp(2rem, 4vw, 4rem);
+      }
+
+      .featured-projects-heading h2 {
+        font-family: "PP Neue Montreal", sans-serif;
+        font-size: clamp(3.5rem, 10vw, 10rem);
+        font-weight: 500;
+        letter-spacing: -0.085em;
+        line-height: 0.82;
+        text-transform: uppercase;
+      }
+
+      .featured-projects-kicker {
+        max-width: 12rem;
+        padding-bottom: 0.35rem;
+        font-size: clamp(0.85rem, 1vw, 1rem);
+        line-height: 1.2;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: clamp(0.5rem, 0.8vw, 1rem);
+        row-gap: clamp(1.5rem, 3vw, 3rem);
+      }
+
+      .project-card {
+        min-width: 0;
+      }
+
+      .project-image-wrap {
+        position: relative;
+        aspect-ratio: 1.5;
+        overflow: hidden;
+        border-radius: clamp(0.65rem, 1.25vw, 1.25rem);
+        background-color: transparent;
+      }
+
+      .project-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .project-details {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.35rem 0.2rem 0;
+      }
+
+      .project-details h3 {
+        font-family: "PP Neue Montreal", sans-serif;
+        font-size: clamp(1.25rem, 3vw, 3rem);
+        font-weight: 600;
+        letter-spacing: -0.065em;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .project-details p {
+        flex: 0 0 auto;
+        padding-top: 0.2rem;
+        font-size: clamp(0.65rem, 0.85vw, 0.85rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 700px) {
+        .featured-projects {
+          --projects-gutter: 1rem;
+          padding-block: 4.5rem 5rem;
+        }
+
+        .featured-projects-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        .featured-projects-heading h2 {
+          font-size: clamp(3.4rem, 15vw, 6rem);
+        }
+
+        .featured-projects-kicker {
+          max-width: 15rem;
+          text-align: left;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+          row-gap: 1.75rem;
+        }
+
+        .project-details h3 {
+          font-size: clamp(1.5rem, 7vw, 2.5rem);
+        }
+      }
+
+      .section-transition {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 100%;
+        width: 100%;
+        height: 100svh;
+        pointer-events: none;
+      }
+
+      .section-transition canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .shader-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+
+      }
+
+      .shader-image-ready {
+        opacity: 0;
+      }
+
+      .hero::after {
+        z-index: 1;
+      }
+
+      .header {
+        position: absolute;
+        left: 2rem;
+        bottom: 2rem;
+        display: flex;
+        justify-content: flex-start;
+        width: max-content;
+        height: max-content;
+        overflow: hidden;
+        z-index: 5;
+      }
+
+      .header h1 {
+        text-transform: uppercase;
+        font-size: clamp(2.5rem, 15vw, 25rem);
+        line-height: 0.85;
+      }
+
+    
+
+      .char,
+      .word,
+      .preloader-counter p {
+        transform: translateY(100%);
+        will-change: transform;
+      }
+
+      @media (max-width: 1000px) {
+        .header {
+          left: 1.25rem;
+          bottom: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preloader">
+      <div class="preloader-header">
+        <div class="preloader-logo" aria-hidden="true">
+          <svg width="82" height="23" viewBox="0 0 82 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7.20466 11.8543C13.4327 11.8543 12.1272 20.2625 14.6724 22.6728H11.223C8.27664 20.3611 11.0881 12.1897 5.49474 12.1897H5.02452C4.48852 13.0282 4.0183 13.7648 3.61713 14.3994V20.3282C3.61713 21.9033 3.95253 22.3045 4.48853 22.6728H0C0.568875 22.3045 0.904281 21.9033 0.904281 20.3282V2.34456C0.904281 0.769463 0.568875 0.368289 0 0H4.48853C3.95253 0.368289 3.61713 0.769463 3.61713 2.34456V13.7648C5.25798 11.1868 8.0366 6.86595 9.37822 4.75486C9.71363 4.21887 9.84844 3.58424 9.84844 2.91342C9.84844 1.67374 9.34534 0.401172 8.54299 0H13.7352C12.798 0.401172 10.9204 2.94631 9.68403 4.88969C8.57916 6.63249 6.7706 9.47687 5.22839 11.8576H7.20466V11.8543Z" fill="#F4F4F4" />
+            <path d="M38.0191 7.79871L35.8423 10.2781C35.474 9.0055 34.6716 8.16699 33.6654 8.16699C32.896 8.16699 32.0246 8.6701 31.1861 9.90979C29.4433 12.5207 25.3592 18.752 23.4158 20.9946C22.4458 22.1324 21.137 22.7703 19.1279 22.7703C16.8162 22.7703 14.7742 21.2643 14.7742 18.0812C14.7742 14.497 18.3584 11.0475 22.9785 11.0475V10.9127C22.9785 10.1762 22.8436 6.75961 20.2985 6.75961C19.0259 6.75961 17.4837 7.66389 16.9477 10.209L15.1392 8.13083C16.0763 7.19366 18.2861 6.32227 20.3314 6.32227C22.8436 6.32227 25.6913 7.72966 25.6913 10.8108V16.8054C26.6614 15.398 27.6347 13.9906 28.4699 12.7542V10.5444C28.4699 8.73586 27.9997 8.46624 27.5985 8.19989C28.1016 8.13412 28.8711 7.9993 29.7096 7.59813C30.3804 7.22984 30.8802 6.82867 31.1828 6.49326V8.80492C32.3534 7.16407 33.3267 6.42749 34.8328 6.42749C36.0429 6.42749 37.0787 6.99636 38.0191 7.79871ZM22.9785 11.5178C20.6668 11.5178 17.3851 13.9281 17.3851 18.2818C17.3851 20.2581 18.6905 21.4978 20.5681 21.4978C21.8407 21.4978 22.5115 21.1295 22.9785 20.6592V11.5178ZM25.6913 20.3238C25.6913 22.1653 26.1615 22.402 26.5956 22.7013H23.6493C23.4158 22.7013 23.2152 22.5665 23.1133 22.3987C23.3139 22.231 23.5145 22.0304 23.6822 21.8299C24.2182 21.1919 24.9219 20.2548 25.6913 19.1499V20.3238ZM31.1861 20.3238C31.1861 22.2343 31.7878 22.5007 32.0903 22.7013H27.6018C28.1378 22.3001 28.4732 21.8989 28.4732 20.3238V15.033C28.5061 14.9672 28.539 14.931 28.5751 14.8653C29.5452 13.425 30.4856 12.0176 31.1861 11.0475V20.3238Z" fill="#F4F4F4" />
+            <path d="M56.1049 6.42773C55.3354 6.89796 54.7994 7.86801 54.4969 8.94C53.392 12.7577 50.7778 22.6719 50.7778 22.6719H50.4095C50.4095 22.6719 48.601 17.3482 47.1278 13.0602C45.9572 17.4139 44.5498 22.6719 44.5498 22.6719H44.1815C44.1815 22.6719 40.6663 12.3894 39.4595 8.97287C39.2589 8.43688 39.0583 7.86801 38.8216 7.39779C38.5881 6.96373 38.2856 6.59215 37.9502 6.42773H42.4387C42.1362 6.62832 42.0047 6.99661 42.0047 7.43395C42.0047 7.8713 42.1395 8.404 42.3401 8.97616C43.1424 11.3207 45.3554 17.9861 45.3554 17.9861C45.3554 17.9861 46.1578 15.1055 46.8976 12.4256C46.4274 11.0511 45.9934 9.77851 45.6908 8.97616C45.3226 7.90418 44.8885 6.76643 44.1848 6.43103H48.6733C48.407 6.63161 48.2722 6.9999 48.2722 7.43724C48.2722 7.87459 48.407 8.40729 48.5747 8.97946C49.377 11.324 51.59 17.9894 51.59 17.9894C51.59 17.9894 53.3986 11.4259 54.1352 8.97946C54.2371 8.67693 54.27 8.37769 54.27 8.10805C54.27 7.23665 53.7669 6.63488 52.9974 6.4343H56.1049V6.42773Z" fill="#F4F4F4" />
+            <path d="M76.969 22.7052C77.5379 22.304 77.8404 21.9028 77.8404 20.3277V11.1501C77.8404 8.47014 76.9361 7.4672 75.7984 7.4672C74.5916 7.4672 73.1184 8.53919 72.1155 9.91369C70.2412 12.4588 66.2886 18.7559 64.3453 20.9985C63.3752 22.1034 62.0336 22.7742 60.0573 22.7742C57.7457 22.7742 55.7036 21.2682 55.7036 18.0851C55.7036 14.5009 59.255 11.0515 63.9079 11.0515V10.9166C63.9079 10.18 63.7731 6.7635 61.228 6.7635C59.9554 6.7635 58.4132 7.6678 57.8772 10.2129L56.0357 8.13473C57.0058 7.19757 59.2188 6.32617 61.2608 6.32617C63.7731 6.32617 66.6208 7.73355 66.6208 10.8147V16.8093C67.5579 15.4348 68.5313 14.0306 69.3994 12.7581V10.4793C69.3994 8.63785 68.9291 8.40437 68.4951 8.13473C68.9982 8.06897 69.7677 7.93415 70.6062 7.5001C71.3099 7.16469 71.7768 6.73063 72.1122 6.42811V8.80554C73.1513 7.2995 74.7593 6.35905 76.4001 6.35905C78.3764 6.35905 80.5533 7.26332 80.5533 10.8147V20.3277C80.5533 22.2382 81.155 22.5046 81.4575 22.7052H76.969ZM61.4614 21.4984C62.734 21.4984 63.4048 21.1301 63.9079 20.6598V11.5151C61.5634 11.5151 58.2816 13.9254 58.2816 18.2791C58.2816 20.2587 59.62 21.4984 61.4614 21.4984ZM66.6208 20.3244C66.6208 22.1659 67.091 22.4026 67.4922 22.7019H64.5787C64.3453 22.7019 64.1447 22.5671 64.0099 22.3994C64.2433 22.2317 65.3482 20.9591 66.6208 19.1505V20.3244ZM72.1122 20.3244C72.1122 22.235 72.714 22.5013 72.9836 22.7019H68.4951C69.064 22.3007 69.3994 21.8995 69.3994 20.3244V15.0664C70.4056 13.5604 71.3756 12.153 72.1122 11.1468V20.3244Z" fill="#F4F4F4" />
+          </svg>
+        </div>
+
+        <div class="preloader-counter">
+          <p>000</p>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-logo">
+        <a href="#">Karwan Properties</a>
+      </div>
+
+      <div class="nav-links">
+        <a href="#home" aria-current="true">
+          <span class="nav-link-bg" aria-hidden="true"></span>
+          <span class="nav-link-text">Home</span>
+        </a>
+        <a href="#about-us">
+          <span class="nav-link-bg" aria-hidden="true"></span>
+          <span class="nav-link-text">About us</span>
+        </a>
+        <a href="#projects">
+          <span class="nav-link-bg" aria-hidden="true"></span>
+          <span class="nav-link-text">Projects</span>
+        </a>
+        <a href="#faqs">
+          <span class="nav-link-bg" aria-hidden="true"></span>
+          <span class="nav-link-text">FAQs</span>
+        </a>
+        <a href="#contact">
+          <span class="nav-link-bg" aria-hidden="true"></span>
+          <span class="nav-link-text">Contact</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="hero" id="home">
+      <img
+        class="hero-image"
+        src="https://storage.helloreaddy.io/project_files/2f13d038-0552-4a09-9a82-8cd1275e23f8/d7b7b47e-bc49-4cd7-b16a-e6d05b3114ac_compressed_canyon-park-lagoon.webp"
+        alt="Dark irises arranged in a vase against a warm interior"
+      />
+      <div class="header">
+        <h1>
+          <span class="visually-hidden">KARWAN</span>
+          <svg width="82" height="23" viewBox="0 0 82 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7.20466 11.8543C13.4327 11.8543 12.1272 20.2625 14.6724 22.6728H11.223C8.27664 20.3611 11.0881 12.1897 5.49474 12.1897H5.02452C4.48852 13.0282 4.0183 13.7648 3.61713 14.3994V20.3282C3.61713 21.9033 3.95253 22.3045 4.48853 22.6728H0C0.568875 22.3045 0.904281 21.9033 0.904281 20.3282V2.34456C0.904281 0.769463 0.568875 0.368289 0 0H4.48853C3.95253 0.368289 3.61713 0.769463 3.61713 2.34456V13.7648C5.25798 11.1868 8.0366 6.86595 9.37822 4.75486C9.71363 4.21887 9.84844 3.58424 9.84844 2.91342C9.84844 1.67374 9.34534 0.401172 8.54299 0H13.7352C12.798 0.401172 10.9204 2.94631 9.68403 4.88969C8.57916 6.63249 6.7706 9.47687 5.22839 11.8576H7.20466V11.8543Z" fill="#F4F4F4" />
+            <path d="M38.0191 7.79871L35.8423 10.2781C35.474 9.0055 34.6716 8.16699 33.6654 8.16699C32.896 8.16699 32.0246 8.6701 31.1861 9.90979C29.4433 12.5207 25.3592 18.752 23.4158 20.9946C22.4458 22.1324 21.137 22.7703 19.1279 22.7703C16.8162 22.7703 14.7742 21.2643 14.7742 18.0812C14.7742 14.497 18.3584 11.0475 22.9785 11.0475V10.9127C22.9785 10.1762 22.8436 6.75961 20.2985 6.75961C19.0259 6.75961 17.4837 7.66389 16.9477 10.209L15.1392 8.13083C16.0763 7.19366 18.2861 6.32227 20.3314 6.32227C22.8436 6.32227 25.6913 7.72966 25.6913 10.8108V16.8054C26.6614 15.398 27.6347 13.9906 28.4699 12.7542V10.5444C28.4699 8.73586 27.9997 8.46624 27.5985 8.19989C28.1016 8.13412 28.8711 7.9993 29.7096 7.59813C30.3804 7.22984 30.8802 6.82867 31.1828 6.49326V8.80492C32.3534 7.16407 33.3267 6.42749 34.8328 6.42749C36.0429 6.42749 37.0787 6.99636 38.0191 7.79871ZM22.9785 11.5178C20.6668 11.5178 17.3851 13.9281 17.3851 18.2818C17.3851 20.2581 18.6905 21.4978 20.5681 21.4978C21.8407 21.4978 22.5115 21.1295 22.9785 20.6592V11.5178ZM25.6913 20.3238C25.6913 22.1653 26.1615 22.402 26.5956 22.7013H23.6493C23.4158 22.7013 23.2152 22.5665 23.1133 22.3987C23.3139 22.231 23.5145 22.0304 23.6822 21.8299C24.2182 21.1919 24.9219 20.2548 25.6913 19.1499V20.3238ZM31.1861 20.3238C31.1861 22.2343 31.7878 22.5007 32.0903 22.7013H27.6018C28.1378 22.3001 28.4732 21.8989 28.4732 20.3238V15.033C28.5061 14.9672 28.539 14.931 28.5751 14.8653C29.5452 13.425 30.4856 12.0176 31.1861 11.0475V20.3238Z" fill="#F4F4F4" />
+            <path d="M56.1049 6.42773C55.3354 6.89796 54.7994 7.86801 54.4969 8.94C53.392 12.7577 50.7778 22.6719 50.7778 22.6719H50.4095C50.4095 22.6719 48.601 17.3482 47.1278 13.0602C45.9572 17.4139 44.5498 22.6719 44.5498 22.6719H44.1815C44.1815 22.6719 40.6663 12.3894 39.4595 8.97287C39.2589 8.43688 39.0583 7.86801 38.8216 7.39779C38.5881 6.96373 38.2856 6.59215 37.9502 6.42773H42.4387C42.1362 6.62832 42.0047 6.99661 42.0047 7.43395C42.0047 7.8713 42.1395 8.404 42.3401 8.97616C43.1424 11.3207 45.3554 17.9861 45.3554 17.9861C45.3554 17.9861 46.1578 15.1055 46.8976 12.4256C46.4274 11.0511 45.9934 9.77851 45.6908 8.97616C45.3226 7.90418 44.8885 6.76643 44.1848 6.43103H48.6733C48.407 6.63161 48.2722 6.9999 48.2722 7.43724C48.2722 7.87459 48.407 8.40729 48.5747 8.97946C49.377 11.324 51.59 17.9894 51.59 17.9894C51.59 17.9894 53.3986 11.4259 54.1352 8.97946C54.2371 8.67693 54.27 8.37769 54.27 8.10805C54.27 7.23665 53.7669 6.63488 52.9974 6.4343H56.1049V6.42773Z" fill="#F4F4F4" />
+            <path d="M76.969 22.7052C77.5379 22.304 77.8404 21.9028 77.8404 20.3277V11.1501C77.8404 8.47014 76.9361 7.4672 75.7984 7.4672C74.5916 7.4672 73.1184 8.53919 72.1155 9.91369C70.2412 12.4588 66.2886 18.7559 64.3453 20.9985C63.3752 22.1034 62.0336 22.7742 60.0573 22.7742C57.7457 22.7742 55.7036 21.2682 55.7036 18.0851C55.7036 14.5009 59.255 11.0515 63.9079 11.0515V10.9166C63.9079 10.18 63.7731 6.7635 61.228 6.7635C59.9554 6.7635 58.4132 7.6678 57.8772 10.2129L56.0357 8.13473C57.0058 7.19757 59.2188 6.32617 61.2608 6.32617C63.7731 6.32617 66.6208 7.73355 66.6208 10.8147V16.8093C67.5579 15.4348 68.5313 14.0306 69.3994 12.7581V10.4793C69.3994 8.63785 68.9291 8.40437 68.4951 8.13473C68.9982 8.06897 69.7677 7.93415 70.6062 7.5001C71.3099 7.16469 71.7768 6.73063 72.1122 6.42811V8.80554C73.1513 7.2995 74.7593 6.35905 76.4001 6.35905C78.3764 6.35905 80.5533 7.26332 80.5533 10.8147V20.3277C80.5533 22.2382 81.155 22.5046 81.4575 22.7052H76.969ZM61.4614 21.4984C62.734 21.4984 63.4048 21.1301 63.9079 20.6598V11.5151C61.5634 11.5151 58.2816 13.9254 58.2816 18.2791C58.2816 20.2587 59.62 21.4984 61.4614 21.4984ZM66.6208 20.3244C66.6208 22.1659 67.091 22.4026 67.4922 22.7019H64.5787C64.3453 22.7019 64.1447 22.5671 64.0099 22.3994C64.2433 22.2317 65.3482 20.9591 66.6208 19.1505V20.3244ZM72.1122 20.3244C72.1122 22.235 72.714 22.5013 72.9836 22.7019H68.4951C69.064 22.3007 69.3994 21.8995 69.3994 20.3244V15.0664C70.4056 13.5604 71.3756 12.153 72.1122 11.1468V20.3244Z" fill="#F4F4F4" />
+          </svg>
+        </h1>
+      </div>
+
+
+    </section>
+
+    <section class="about-section" id="about-us" aria-label="About section">
+      <div class="section-transition">
+        <canvas id="ink-bleed-canvas" aria-hidden="true"></canvas>
+      </div>
+      <div class="about-content">
+        <div class="short-breif" data-karwan-gs-text>
+         
+         <p> Karwan Properties brings a team of industry veterans with over a decade of hands-on experience in Dubai's real estate market.
+
+We're building relationships based on transparency and results. As an authorized Danube partner, we offer direct portfolio access and discounts unavailable elsewhere.</p>
+        </div>
+      </div>
+      <section class="about-feature" aria-label="Karwan Properties team">
+        <h2>Here to<br />stand in<br />your corner</h2>
+        <div class="about-feature-image-wrap">
+          <img
+            class="about-feature-image"
+            src="./assets/karwan-team-staircase.png"
+            alt="The Karwan Properties team gathered on a staircase"
+          />
+        </div>
+        <div class="about-feature-copy">
+          <p class="about-feature-lead" data-karwan-line-txt>Karwan Properties brings a team of industry veterans with over a decade of hands-on experience in Dubai's real estate market.</p>
+          <p>We believe that successful property decisions begin with transparency, local expertise, and direct access to the right opportunities. As an authorized Danube partner, we help clients find the right home or investment with confidence.</p>
+        </div>
+      </section>
+    </section>
+
+    <section class="featured-projects" id="projects" aria-labelledby="featured-projects-title">
+      <div class="featured-projects-heading">
+        <h2 id="featured-projects-title">Featured<br />Projects</h2>
+        <p class="featured-projects-kicker">A selection of places to live, grow, and invest in Dubai.</p>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-image-wrap">
+            <div class="project-image" data-shader-src="./assets/project-damac-lagoons.png" role="img" aria-label="Aerial view of a luxury lagoon-side residential community"></div>
+          </div>
+          <div class="project-details">
+            <h3>Damac Lagoons</h3>
+            <p>Dubai, UAE</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image-wrap">
+            <div class="project-image" data-shader-src="./assets/project-greenz-villas.png" role="img" aria-label="Contemporary villas at Greenz by Danube"></div>
+          </div>
+          <div class="project-details">
+            <h3>Greenz by Danube</h3>
+            <p>Dubai, UAE</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image-wrap">
+            <div class="project-image" data-shader-src="./assets/project-greenz-park.png" role="img" aria-label="Landscaped park and lagoon in a residential community"></div>
+          </div>
+          <div class="project-details">
+            <h3>Greenz Community</h3>
+            <p>Dubai, UAE</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image-wrap">
+            <div class="project-image" data-shader-src="./assets/project-oceanz-towers.png" role="img" aria-label="Modern residential towers with glass balconies and palm landscaping"></div>
+          </div>
+          <div class="project-details">
+            <h3>Oceanz by Danube</h3>
+            <p>Dubai, UAE</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image-wrap">
+            <div class="project-image" data-shader-src="./assets/project-timez-skyline.png" role="img" aria-label="Contemporary residential skyscraper at blue hour"></div>
+          </div>
+          <div class="project-details">
+            <h3>Timez by Danube</h3>
+            <p>Dubai, UAE</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image-wrap">
+            <div class="project-image" data-shader-src="./assets/project-olivz-residences.png" role="img" aria-label="Modern residences surrounded by olive trees and a landscaped courtyard"></div>
+          </div>
+          <div class="project-details">
+            <h3>Olivz by Danube</h3>
+            <p>Dubai, UAE</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script>
+
+      gsap.registerPlugin(CustomEase, SplitText, ScrollTrigger);
+      CustomEase.create("hop", "0.8, 0, 0.2, 1");
+      CustomEase.create("hop2", "0.9, 0, 0.1, 1");
+
+      function initTextReveal(element) {
+        const split = SplitText.create(element, {
+          type: "words,chars",
+          charsClass: "text-reveal__char",
+        });
+        const targets = split.chars;
+        const colorStart = "#dddddd";
+        const colorAccent = "#a6d96a";
+        const colorEnd = "#000000";
+        const accentDuration = 0.025;
+        const accentHold = 0.04;
+        const colorEndDuration = 0.05;
+        const revealSpan = 1 - accentDuration - accentHold - colorEndDuration;
+
+        gsap.set(targets, { color: colorStart });
+
+        const revealTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top 90%",
+            end: "top 10%",
+            scrub: true,
+          },
+        });
+
+        targets.forEach((target, index) => {
+          const start = targets.length > 1
+            ? (index / (targets.length - 1)) * revealSpan
+            : 0;
+          revealTimeline.to(
+            target,
+            {
+              color: colorAccent,
+              duration: accentDuration,
+              ease: "none",
+            },
+            start,
+          );
+          revealTimeline.to(
+            target,
+            {
+              color: colorEnd,
+              duration: colorEndDuration,
+              ease: "none",
+            },
+            start + accentDuration + accentHold,
+          );
+        });
+      }
+
+      document.querySelectorAll("[data-karwan-gs-text]").forEach(initTextReveal);
+
+      document.fonts.ready.then(() => {
+        document.querySelectorAll("[data-karwan-line-txt]").forEach((element) => {
+          SplitText.create(element, {
+            type: "words,lines",
+            mask: "lines",
+            linesClass: "line",
+            autoSplit: true,
+            onSplit: (instance) => {
+              return gsap.from(instance.lines, {
+                yPercent: 120,
+                stagger: 0.05,
+                duration: 0.7,
+                ease: "circ.inOut",
+                scrollTrigger: {
+                  trigger: element,
+                  start: "clamp(top center)",
+                  end: "clamp(bottom center)",
+                },
+              });
+            },
+          });
+        });
+      });
+
+      const canvas = document.querySelector("#ink-bleed-canvas");
+      const gl = canvas.getContext("webgl", {
+        alpha: true,
+        antialias: true,
+        premultipliedAlpha: false,
+      });
+      const transitionProgress = { value: 0 };
+      const inkColor = "#F4F4F4";
+
+      const hexToRgb = (hex) => {
+        const value = hex.replace("#", "");
+        const normalized = value.length === 3
+          ? value.split("").map((channel) => channel + channel).join("")
+          : value;
+
+        return [
+          parseInt(normalized.slice(0, 2), 16) / 255,
+          parseInt(normalized.slice(2, 4), 16) / 255,
+          parseInt(normalized.slice(4, 6), 16) / 255,
+        ];
+      };
+
+      if (gl) {
+        const vertexSource = `
+          attribute vec2 aPosition;
+          varying vec2 vUv;
+
+          void main() {
+            vUv = aPosition * 0.5 + 0.5;
+            gl_Position = vec4(aPosition, 0.0, 1.0);
+          }
+        `;
+        const fragmentSource = `
+          precision highp float;
+          varying vec2 vUv;
+          uniform float uProgress;
+          uniform float uTime;
+          uniform vec3 uInkColor;
+
+          float hash(vec2 p) {
+            p = fract(p * vec2(123.34, 456.21));
+            p += dot(p, p + 45.32);
+            return fract(p.x * p.y);
+          }
+
+          float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            f = f * f * (3.0 - 2.0 * f);
+            return mix(
+              mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+              mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
+              f.y
+            );
+          }
+
+          float fbm(vec2 p) {
+            float value = 0.0;
+            float amplitude = 0.4;
+            for (int i = 0; i < 4; i++) {
+              value += noise(p) * amplitude;
+              p = p * 4.03 + vec2(13.1, 7.7);
+              amplitude *= 0.5;
+            }
+            return value;
+          }
+
+          void main() {
+            float broad = fbm(vec2(vUv.x * 18.0, vUv.y * 3.0 + uTime * 0.012));
+            float medium = fbm(vec2(vUv.x * 52.0, vUv.y * 8.0 - uTime * 0.017));
+            float fine = fbm(vec2(vUv.x * 10.0, vUv.y * 18.0 + uTime * 0.025));
+            float detail = (broad - 0.5) * 1.24 + (medium - 0.5) * 0.11 + (fine - 0.5) * 0.04;
+            float edge = uProgress * 0.30 + detail * 0.30 * smoothstep(0.0, 0.7, uProgress);
+            edge = clamp(edge, 0.0, 0.2904);
+            float core = 1.0 - smoothstep(edge - 0.002, edge + 0.002, vUv.y);
+            float bleed = 1.0 - smoothstep(edge - 0.03, edge + 0.0096, vUv.y);
+            float alpha = max(core, bleed * 0.12);
+            gl_FragColor = vec4(uInkColor, alpha);
+          }
+        `;
+
+        const compileShader = (type, source) => {
+          const shader = gl.createShader(type);
+          gl.shaderSource(shader, source);
+          gl.compileShader(shader);
+
+          if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            gl.deleteShader(shader);
+            return null;
+          }
+
+          return shader;
+        };
+
+        const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource);
+        const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource);
+
+        if (vertexShader && fragmentShader) {
+          const program = gl.createProgram();
+          gl.attachShader(program, vertexShader);
+          gl.attachShader(program, fragmentShader);
+          gl.linkProgram(program);
+
+          if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+              -1, -1,
+              1, -1,
+              -1, 1,
+              1, 1,
+            ]), gl.STATIC_DRAW);
+            gl.useProgram(program);
+
+            const positionLocation = gl.getAttribLocation(program, "aPosition");
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+            gl.clearColor(0, 0, 0, 0);
+
+            const progressLocation = gl.getUniformLocation(program, "uProgress");
+            const timeLocation = gl.getUniformLocation(program, "uTime");
+            const inkColorLocation = gl.getUniformLocation(program, "uInkColor");
+            gl.uniform3fv(inkColorLocation, hexToRgb(inkColor));
+            const startedAt = performance.now();
+
+            const resizeCanvas = () => {
+              const bounds = canvas.getBoundingClientRect();
+              const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+              const width = Math.max(1, Math.round(bounds.width * pixelRatio));
+              const height = Math.max(1, Math.round(bounds.height * pixelRatio));
+
+              if (canvas.width !== width || canvas.height !== height) {
+                canvas.width = width;
+                canvas.height = height;
+                gl.viewport(0, 0, width, height);
+              }
+            };
+
+            const render = (now) => {
+              gl.clear(gl.COLOR_BUFFER_BIT);
+              gl.uniform1f(progressLocation, transitionProgress.value);
+              gl.uniform1f(timeLocation, (now - startedAt) / 1000);
+              gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+              requestAnimationFrame(render);
+            };
+
+            resizeCanvas();
+            window.addEventListener("resize", resizeCanvas);
+            requestAnimationFrame(render);
+          } else {
+            canvas.hidden = true;
+          }
+        } else {
+          canvas.hidden = true;
+        }
+      } else {
+        canvas.hidden = true;
+      }
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".hero",
+          scrub: true,
+          start: "bottom bottom",
+          end: () => `+=${window.innerHeight}`,
+        },
+      }).to(transitionProgress, {
+        value: 1,
+        ease: "none",
+      });
+
+      const featureMotion = gsap.matchMedia();
+      featureMotion.add("(prefers-reduced-motion: no-preference)", () => {
+        const featureScrollTrigger = {
+          trigger: ".about-feature",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        };
+
+        gsap.fromTo(
+          ".about-feature-image",
+          { yPercent: -7 },
+          {
+            yPercent: 7,
+            ease: "none",
+            scrollTrigger: featureScrollTrigger,
+          },
+        );
+
+        gsap.fromTo(
+          ".about-feature-copy",
+          { y: 30 },
+          {
+            y: -30,
+            ease: "none",
+            scrollTrigger: featureScrollTrigger,
+          },
+        );
+      });
+
+      const projectCardMotion = gsap.matchMedia();
+      projectCardMotion.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.utils.toArray(".project-card").forEach((card, index) => {
+          const direction = index % 2 === 0 ? -1 : 1;
+          const imageWrap = card.querySelector(".project-image-wrap");
+          const image = card.querySelector(".project-image");
+          const cardScrollTrigger = {
+            trigger: card,
+            start: "top bottom",
+            toggleActions: "restart none restart reset",
+          };
+          const transformOrigin = direction < 0 ? "right bottom" : "left bottom";
+          gsap.set(card, { transformOrigin });
+          gsap.set([imageWrap, image], { transformOrigin });
+
+          const cardTimeline = gsap.timeline({
+            scrollTrigger: { ...cardScrollTrigger, markers: false },
+          });
+          cardTimeline.fromTo(
+            card,
+            { rotation: direction * 3 },
+            { rotation: 0, duration: 1.1, ease: "power3.out" },
+            0,
+          );
+          cardTimeline.fromTo(
+            imageWrap,
+            { scale: 0.8, },
+            { scale: 1, rotationY: 0,  duration: 1, ease: "power3.out" },
+            0,
+          );
+          cardTimeline.fromTo(
+            image,
+            { scale: 1.5},
+            { scale: 1, duration: 0.8, ease: "power3.out" },
+            0,
+          );
+        });
+      });
+
+      const splitText = (selector, type, className, mask = true) => {
+        return SplitText.create(selector, {
+          type: type,
+          [`${type}Class`]: className,
+          ...(mask && { mask: type }),
+        });
+      };
+
+      const navSplit = splitText("nav a", "words", "word");
+      const navLinks = document.querySelectorAll(".nav-links a");
+      const navSections = document.querySelectorAll(".hero, .nav-spacer, .about-section, .featured-projects");
+      const navSectionObserver = new IntersectionObserver(
+        (entries) => {
+          const visibleSection = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visibleSection) return;
+
+          navLinks.forEach((link) => {
+            if (link.hash === `#${visibleSection.target.id}`) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      navSections.forEach((section) => navSectionObserver.observe(section));
+
+      gsap.set(".preloader-header .preloader-logo svg path, .header h1 svg path",  {
+        yPercent: 110,
+      });
+      gsap.set(".nav-link-bg", { yPercent: 110 });
+      gsap.set(".hero-image", { y: 150 });
+
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      tl.to(
+        ".preloader-header .preloader-logo svg path",
+        {
+          yPercent: 0,
+          duration: 1,
+          ease: "hop2",
+          stagger: { each: 0.025, from: "random" },
+        },
+        "0.35",
+      );
+
+      tl.to(
+        ".preloader-counter p",
+        {
+          y: "0%",
+          duration: 1,
+          ease: "hop2",
+          onStart: () => {
+            const counterEl = document.querySelector(".preloader-counter p");
+            const counter = { value: 0 };
+
+            gsap.to(counter, {
+              value: 100,
+              duration: 2,
+              delay: 0.5,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                counterEl.textContent = String(Math.round(counter.value)).padStart(
+                  3,
+                  "0",
+                );
+              },
+            });
+          },
+        },
+        "<",
+      );
+
+      tl.to(
+        ".preloader-counter p",
+        {
+          y: "-100%",
+          duration: 0.75,
+          ease: "hop2",
+        },
+        3.25,
+      );
+
+      tl.to(
+        ".preloader-header .preloader-logo svg path",
+        {
+          yPercent: -150,
+          duration: 1,
+          ease: "hop2",
+          stagger: { each: 0.045, from: "random" },
+        },
+        3.25,
+      );
+
+      tl.to(
+        ".hero-image",
+        {
+          y: 0,
+          duration: 1.7,
+        ease: "hop",
+        },
+        3.90,
+      );
+
+      tl.to(
+        ".preloader",
+        {
+          clipPath:
+            "polygon(0% 0%, 100% 0%, 100% 10%, 87.5% 6.2%, 75% 2.9%, 62.5% 0.8%, 50% 0%, 37.5% 0.8%, 25% 2.9%, 12.5% 6.2%, 0% 10%)",
+          duration: 0.8,
+          ease: "power2.in",
+        },
+        4.35,
+      );
+
+      tl.to(
+        ".preloader",
+        {
+          clipPath:
+            "polygon(0% 0%, 100% 0%, 100% 0%, 87.5% 0%, 75% 0%, 62.5% 0%, 50% 0%, 37.5% 0%, 25% 0%, 12.5% 0%, 0% 0%)",
+          duration: 0.3,
+          ease: "power2.out",
+        },
+        ">",
+      );
+
+      tl.to(
+        ".header h1 svg path",
+        {
+          yPercent: 0,
+          duration: 1,
+          ease: "hop",
+          stagger: { each: 0.075, from: "random" },
+        },
+        4.65,
+      );
+
+      tl.to(
+        ".nav-link-bg",
+        {
+          yPercent: 0,
+          duration: 0.8,
+          ease: "hop2",
+          stagger: { each: 0.075, from: "start" },
+        },
+        4.55,
+      );
+
+      tl.to(
+        "nav a .word",
+        {
+          y: "0%",
+          duration: 1,
+          ease: "hop",
+          stagger: 0.075,
+        },
+        4.75,
+      );
+
+    </script>
+    <script type="module">
+      import Lenis from "https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.mjs";
+
+      const { gsap, ScrollTrigger } = window;
+      const mobileBreakpoint = window.matchMedia("(max-width: 767px)");
+      const lenisSettings = {
+        autoRaf: false,
+        lerp: 0.08,
+        wheelMultiplier: 1,
+      };
+      const updateScrollTrigger = () => ScrollTrigger.update();
+      let lenis = null;
+      let lenisTicker = null;
+
+      function syncLenis() {
+        if (mobileBreakpoint.matches) {
+          if (!lenis) return;
+
+          gsap.ticker.remove(lenisTicker);
+          lenis.off("scroll", updateScrollTrigger);
+          lenis.destroy();
+          lenis = null;
+          lenisTicker = null;
+          ScrollTrigger.update();
+          return;
+        }
+
+        if (lenis) return;
+
+        lenis = new Lenis(lenisSettings);
+        lenis.on("scroll", updateScrollTrigger);
+        lenisTicker = (time) => lenis.raf(time * 2000);
+        gsap.ticker.add(lenisTicker);
+      }
+
+      syncLenis();
+      mobileBreakpoint.addEventListener("change", syncLenis);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.2/three.min.js"></script>
+    <script>
+      (() => {
+        if (!window.THREE) return;
+
+        const targets = [...document.querySelectorAll(".about-feature-image, .project-image")];
+        if (!targets.length) return;
+
+        const isTouchViewport = window.matchMedia("(pointer: coarse)").matches;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isTouchViewport ? 1 : 2));
+        renderer.setClearColor(0x000000, 0);
+        renderer.autoClear = false;
+        renderer.debug.onShaderError = () => {
+          targets.forEach((image) => image.classList.remove("shader-image-ready"));
+        };
+        renderer.domElement.className = "shader-canvas";
+        renderer.domElement.setAttribute("aria-hidden", "true");
+        document.body.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1);
+        const geometry = new THREE.PlaneGeometry(1, 1);
+        const loader = new THREE.TextureLoader();
+        const viewport = { width: 0, height: 0 };
+        const config = {
+          blurRadius: 0.05,
+          blurZone: 0.25,
+          aberration: 0.05,
+          clampEdges: false,
+        };
+        const sharedUniforms = {
+          uBlurRadius: { value: 0 },
+          uBlurZone: { value: config.blurZone },
+          uAberration: { value: 0 },
+          uClampEdges: { value: config.clampEdges ? 1 : 0 },
+          uViewportSize: { value: new THREE.Vector2(1, 1) },
+        };
+        const vertexShader = `
+          varying vec2 vUv;
+          varying vec2 vScreen;
+
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vScreen = gl_Position.xy / gl_Position.w * 0.5 + 0.5;
+          }
+        `;
+        const fragmentShader = `
+          #define SAMPLE_COUNT ${isTouchViewport ? 16 : 32}
+          #define GOLDEN_ANGLE 2.39996323
+
+          uniform sampler2D uTexture;
+          uniform vec2 uTextureSize;
+          uniform vec2 uCoverScale;
+          uniform vec2 uImageSize;
+          uniform float uBlurRadius;
+          uniform float uBlurZone;
+          uniform float uAberration;
+          uniform float uClampEdges;
+          uniform float uGrayscale;
+          uniform float uCornerRadius;
+          uniform vec2 uViewportSize;
+          uniform vec2 uClipCenter;
+          uniform vec2 uClipAxisX;
+          uniform vec2 uClipAxisY;
+          uniform vec2 uClipSize;
+
+          varying vec2 vUv;
+          varying vec2 vScreen;
+
+          vec2 coverUv(vec2 pixel) {
+            vec2 insidePixel = clamp(pixel, vec2(0.5), uImageSize - 0.5);
+            return (insidePixel / uImageSize - 0.5) * uCoverScale + 0.5;
+          }
+
+          float edgeMask(vec2 pixel, float softness) {
+            vec2 edgeDistance = min(pixel, uImageSize - pixel);
+            vec2 mask = smoothstep(-softness, softness, edgeDistance);
+            return mask.x * mask.y;
+          }
+
+          float roundedRectMask(vec2 pixel, vec2 size, float radius) {
+            vec2 halfSize = size * 0.5;
+            vec2 q = abs(pixel - halfSize) - (halfSize - vec2(radius));
+            float distanceToEdge = length(max(q, vec2(0.0))) + min(max(q.x, q.y), 0.0) - radius;
+            return 1.0 - smoothstep(-1.0, 1.0, distanceToEdge);
+          }
+
+          vec3 splitColor(vec2 pixel, vec2 shift, float lod) {
+            return vec3(
+              textureLod(uTexture, coverUv(pixel + shift), lod).r,
+              textureLod(uTexture, coverUv(pixel), lod).g,
+              textureLod(uTexture, coverUv(pixel - shift), lod).b
+            );
+          }
+
+          vec3 blurredColor(vec2 pixel, float radius, vec2 shift) {
+            float sampleSpacing = radius / sqrt(float(SAMPLE_COUNT)) * 2.0;
+            vec2 texelsPerPixel = uCoverScale * uTextureSize / uImageSize;
+            float lod = log2(max(sampleSpacing * max(texelsPerPixel.x, texelsPerPixel.y), 1.0));
+            vec3 color = vec3(0.0);
+            float totalWeight = 0.0;
+
+            for (int i = 0; i < SAMPLE_COUNT; i++) {
+              float progress = (float(i) + 0.5) / float(SAMPLE_COUNT);
+              float angle = float(i) * GOLDEN_ANGLE;
+              vec2 samplePixel = pixel + vec2(cos(angle), sin(angle)) * sqrt(progress) * radius;
+              float weight = exp(-2.0 * progress);
+              color += splitColor(samplePixel, shift, lod) * weight;
+              totalWeight += weight;
+            }
+
+            return color / totalWeight;
+          }
+
+          void main() {
+            float padding = uBlurRadius * (1.0 - uClampEdges);
+            vec2 pixel = vUv * (uImageSize + 2.0 * padding) - padding;
+            float effectStrength = 1.0 - smoothstep(0.0, uBlurZone, vScreen.y);
+            effectStrength *= effectStrength;
+            float blurRadius = uBlurRadius * effectStrength;
+            vec2 aberrationShift = normalize(vScreen - 0.5 + 0.0001) * uAberration * effectStrength;
+            vec3 sharp = splitColor(pixel, aberrationShift, 0.0);
+            float sharpAlpha = edgeMask(pixel, 0.5);
+            vec3 color;
+            float alpha;
+
+            if (blurRadius > 0.1) {
+              vec3 blurred = blurredColor(pixel, blurRadius, aberrationShift);
+              float blendAmount = smoothstep(0.0, 2.0, blurRadius);
+              color = mix(sharp, blurred, blendAmount);
+              alpha = mix(sharpAlpha, edgeMask(pixel, mix(blurRadius * 0.6, 0.5, uClampEdges)), blendAmount);
+            } else {
+              color = sharp;
+              alpha = sharpAlpha;
+            }
+
+            if (uCornerRadius > 0.0) {
+              vec2 screenPixel = vec2(vScreen.x * uViewportSize.x, (1.0 - vScreen.y) * uViewportSize.y);
+              vec2 clipDelta = screenPixel - uClipCenter;
+              vec2 clipPixel = vec2(dot(clipDelta, uClipAxisX), dot(clipDelta, uClipAxisY)) + uClipSize * 0.5;
+              alpha *= roundedRectMask(clipPixel, uClipSize, uCornerRadius);
+            }
+
+            float gray = dot(color, vec3(0.299, 0.587, 0.114));
+            color = mix(color, vec3(gray), uGrayscale);
+            gl_FragColor = vec4(color, alpha);
+            #include <encodings_fragment>
+          }
+        `;
+
+        function updateCoverScale(plane) {
+          if (!plane.aspect) return;
+
+          const width = plane.image.offsetWidth;
+          const height = plane.image.offsetHeight;
+          if (!width || !height) return;
+
+          const containerAspect = width / height;
+          plane.material.uniforms.uCoverScale.value.set(
+            Math.min(containerAspect / plane.aspect, 1),
+            Math.min(plane.aspect / containerAspect, 1),
+          );
+        }
+
+        const planes = targets.map((image) => {
+          const clip = image.closest(".about-feature-image-wrap") || image.closest(".project-image-wrap") || image.closest(".hero");
+          const cornerRadius = image.classList.contains("project-image") && clip
+            ? parseFloat(getComputedStyle(clip).borderTopLeftRadius) || 0
+            : 0;
+          const material = new THREE.ShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            transparent: true,
+            uniforms: {
+              ...sharedUniforms,
+              uTexture: { value: null },
+              uTextureSize: { value: new THREE.Vector2(1, 1) },
+              uCoverScale: { value: new THREE.Vector2(1, 1) },
+              uImageSize: { value: new THREE.Vector2(1, 1) },
+              uGrayscale: { value: image.classList.contains("about-feature-image") ? 1 : 0 },
+              uCornerRadius: { value: cornerRadius },
+              uClipCenter: { value: new THREE.Vector2() },
+              uClipAxisX: { value: new THREE.Vector2(1, 0) },
+              uClipAxisY: { value: new THREE.Vector2(0, 1) },
+              uClipSize: { value: new THREE.Vector2(1, 1) },
+            },
+          });
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.visible = false;
+          scene.add(mesh);
+
+          const plane = {
+            image,
+            card: image.closest(".project-card"),
+            clip,
+            material,
+            mesh,
+            aspect: 0,
+            loaded: false,
+          };
+
+          loader.load(image.dataset.shaderSrc || image.currentSrc || image.src, (texture) => {
+            texture.colorSpace = THREE.SRGBColorSpace;
+            texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            material.uniforms.uTexture.value = texture;
+            material.uniforms.uTextureSize.value.set(texture.image.width, texture.image.height);
+            plane.aspect = texture.image.width / texture.image.height;
+            updateCoverScale(plane);
+            plane.loaded = true;
+            image.classList.add("shader-image-ready");
+          });
+
+          return plane;
+        });
+
+        function resize() {
+          const width = document.documentElement.clientWidth;
+          const height = window.innerHeight;
+          if (width === viewport.width && height === viewport.height) return;
+
+          viewport.width = width;
+          viewport.height = height;
+          camera.left = -viewport.width / 2;
+          camera.right = viewport.width / 2;
+          camera.top = viewport.height / 2;
+          camera.bottom = -viewport.height / 2;
+          camera.updateProjectionMatrix();
+          renderer.setSize(viewport.width, viewport.height);
+          sharedUniforms.uViewportSize.value.set(viewport.width, viewport.height);
+          sharedUniforms.uBlurRadius.value = viewport.height * config.blurRadius;
+          sharedUniforms.uAberration.value = viewport.height * config.aberration;
+          planes.forEach(updateCoverScale);
+        }
+
+        function render() {
+          renderer.setScissorTest(false);
+          renderer.clear();
+          renderer.setScissorTest(true);
+
+          planes.forEach((plane) => {
+            const { image, clip, mesh, material } = plane;
+            if (!clip || !plane.loaded) return;
+
+            const bounds = image.getBoundingClientRect();
+            const clipBounds = clip.getBoundingClientRect();
+            const width = image.offsetWidth;
+            const height = image.offsetHeight;
+            const left = Math.max(0, clipBounds.left);
+            const right = Math.min(viewport.width, clipBounds.right);
+            const top = Math.max(0, clipBounds.top);
+            const bottom = Math.min(viewport.height, clipBounds.bottom);
+            if (right <= left || bottom <= top || !width || !height) return;
+
+            renderer.setScissor(left, viewport.height - bottom, right - left, bottom - top);
+            const padding = config.clampEdges ? 0 : sharedUniforms.uBlurRadius.value * 2;
+            const cardTransform = plane.card ? getComputedStyle(plane.card).transform : "none";
+            const cardMatrix = cardTransform === "none" ? null : new DOMMatrix(cardTransform);
+            const clipTransform = getComputedStyle(clip).transform;
+            const clipMatrix = clipTransform === "none" ? null : new DOMMatrix(clipTransform);
+            const cardScaleX = cardMatrix ? Math.hypot(cardMatrix.a, cardMatrix.b) || 1 : 1;
+            const cardScaleY = cardMatrix ? Math.hypot(cardMatrix.c, cardMatrix.d) || 1 : 1;
+            const clipScaleX = clipMatrix ? Math.hypot(clipMatrix.a, clipMatrix.b) || 1 : 1;
+            const clipScaleY = clipMatrix ? Math.hypot(clipMatrix.c, clipMatrix.d) || 1 : 1;
+            const scaleX = cardScaleX * clipScaleX;
+            const scaleY = cardScaleY * clipScaleY;
+            const imageTransform = getComputedStyle(image).transform;
+            const imageMatrix = imageTransform === "none" ? null : new DOMMatrix(imageTransform);
+            const imageScaleX = imageMatrix ? Math.hypot(imageMatrix.a, imageMatrix.b) || 1 : 1;
+            const imageScaleY = imageMatrix ? Math.hypot(imageMatrix.c, imageMatrix.d) || 1 : 1;
+            const imageOverscan = plane.card ? 1.04 : 1;
+            const imageWidth = width * scaleX * imageScaleX * imageOverscan;
+            const imageHeight = height * scaleY * imageScaleY * imageOverscan;
+            const axisX = cardMatrix
+              ? [cardMatrix.a / cardScaleX, cardMatrix.b / cardScaleX]
+              : [1, 0];
+            const axisY = cardMatrix
+              ? [cardMatrix.c / cardScaleY, cardMatrix.d / cardScaleY]
+              : [0, 1];
+            const clipStyle = getComputedStyle(clip);
+            material.uniforms.uClipCenter.value.set(
+              (clipBounds.left + clipBounds.right) / 2,
+              (clipBounds.top + clipBounds.bottom) / 2,
+            );
+            material.uniforms.uClipAxisX.value.set(axisX[0], axisX[1]);
+            material.uniforms.uClipAxisY.value.set(axisY[0], axisY[1]);
+            material.uniforms.uClipSize.value.set(clip.offsetWidth * scaleX, clip.offsetHeight * scaleY);
+            material.uniforms.uCornerRadius.value = plane.card
+              ? (parseFloat(clipStyle.borderTopLeftRadius) || 0) * Math.min(scaleX, scaleY)
+              : 0;
+            mesh.scale.set(imageWidth + padding, imageHeight + padding, 1);
+            mesh.rotation.z = cardMatrix ? -Math.atan2(cardMatrix.b, cardMatrix.a) : 0;
+            mesh.position.set(
+              bounds.left + bounds.width / 2 - viewport.width / 2,
+              viewport.height / 2 - bounds.top - bounds.height / 2,
+              0,
+            );
+            material.uniforms.uImageSize.value.set(imageWidth, imageHeight);
+            planes.forEach(({ mesh: otherMesh }) => {
+              otherMesh.visible = otherMesh === mesh;
+            });
+            renderer.render(scene, camera);
+          });
+
+          requestAnimationFrame(render);
+        }
+
+        resize();
+        window.addEventListener("resize", resize);
+        requestAnimationFrame(render);
+      })();
+    </script>
+  </body>
+</html>
